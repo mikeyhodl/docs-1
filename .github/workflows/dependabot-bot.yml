@@ -22,7 +22,7 @@ jobs:
     
     # Checkout the repo into the workspace within the VM
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     # - name: Setup .NET
     #   uses: actions/setup-dotnet@v3
     #   with:
