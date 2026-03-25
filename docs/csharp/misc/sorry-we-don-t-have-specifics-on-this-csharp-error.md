@@ -68,7 +68,6 @@ f1_keywords:
   - "CS7018"
   - "CS7019"
   - "CS7020"
-  - "CS7022" # build only diagnostic
   - "CS7024"
   - "CS7025"
   - "CS7026"
@@ -308,9 +307,7 @@ f1_keywords:
   - "CS8787"
   - "CS8788"
   - "CS8789"
-  - "CS8801"
   - "CS8804"
-  - "CS8805"
   - "CS8806"
   - "CS8807"
   - "CS8808"
@@ -340,7 +337,6 @@ f1_keywords:
   - "CS8894"
   - "CS8895"
   - "CS8896"
-  - "CS8899"
   - "CS8900"
   - "CS8901"
   - "CS8902"
@@ -349,7 +345,6 @@ f1_keywords:
   - "CS8909"
   - "CS8911"
   # C# 10 errors start here:
-  - "CS8937"
   - "CS8973"
 # Coming in C# 15
   - "CS9343"
