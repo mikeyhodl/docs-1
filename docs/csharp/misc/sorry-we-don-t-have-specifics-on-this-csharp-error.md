@@ -299,7 +299,6 @@ f1_keywords:
   - "CS8761"
   - "CS8771"
   - "CS8772"
-  - "CS8778"
   - "CS8783"
   - "CS8784"
   - "CS8785"
@@ -344,8 +343,6 @@ f1_keywords:
   - "CS8906"
   - "CS8909"
   - "CS8911"
-  # C# 10 errors start here:
-  - "CS8973"
 # Coming in C# 15
   - "CS9343"
   - "CS9346"
