@@ -26,13 +26,13 @@ The app uses the <xref:Microsoft.Extensions.AI> and <xref:Microsoft.Extensions.V
 
 :::zone target="docs" pivot="openai"
 
-[!INCLUDE [openai-prereqs](includes/prerequisites-openai.md)]
+[!INCLUDE [openai-prereqs](../../quickstarts/includes/prerequisites-openai.md)]
 
 :::zone-end
 
 :::zone target="docs" pivot="azure-openai"
 
-[!INCLUDE [azure-openai-prereqs](includes/prerequisites-azure-openai.md)]
+[!INCLUDE [azure-openai-prereqs](../../quickstarts/includes/prerequisites-azure-openai.md)]
 
 :::zone-end
 
@@ -65,7 +65,6 @@ Complete the following steps to create a .NET console app that can:
     dotnet add package Azure.Identity
     dotnet add package Azure.AI.OpenAI
     dotnet add package Microsoft.Extensions.AI.OpenAI
-    dotnet add package Microsoft.Extensions.VectorData.Abstractions
     dotnet add package Microsoft.SemanticKernel.Connectors.InMemory --prerelease
     dotnet add package Microsoft.Extensions.Configuration
     dotnet add package Microsoft.Extensions.Configuration.UserSecrets
@@ -76,8 +75,7 @@ Complete the following steps to create a .NET console app that can:
 
     - [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) provides [`Microsoft Entra ID`](/entra/fundamentals/whatis) token authentication support across the Azure SDK using classes such as `DefaultAzureCredential`.
     - [`Azure.AI.OpenAI`](https://www.nuget.org/packages/Azure.AI.OpenAI) is the official package for using OpenAI's .NET library with the Azure OpenAI Service.
-    - [`Microsoft.Extensions.VectorData.Abstractions`](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions) enables Create-Read-Update-Delete (CRUD) and search operations on vector stores.
-    - [`Microsoft.SemanticKernel.Connectors.InMemory`](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) provides an in-memory vector store class to hold queryable vector data records.
+    - [`Microsoft.SemanticKernel.Connectors.InMemory`](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) provides an in-memory vector store class to hold queryable vector data records. It also brings in [`Microsoft.Extensions.VectorData.Abstractions`](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions), which enables CRUD and search operations on vector stores.
     - [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) provides an implementation of key-value pair&mdash;based configuration.
     - [`Microsoft.Extensions.Configuration.UserSecrets`](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) is a user secrets configuration provider implementation for `Microsoft.Extensions.Configuration`.
 
@@ -86,19 +84,17 @@ Complete the following steps to create a .NET console app that can:
     :::zone target="docs" pivot="openai"
 
     ```bash
-    dotnet add package Microsoft.Extensions.AI.OpenAI --prerelease
-    dotnet add package Microsoft.Extensions.VectorData.Abstractions
-    dotnet add package Microsoft.SemanticKernel.Connectors.InMemory --prerelease
-    dotnet add package Microsoft.Extensions.Configuration
-    dotnet add package Microsoft.Extensions.Configuration.UserSecrets
-    dotnet add package System.Linq.AsyncEnumerable
+    dotnet package add Microsoft.Extensions.AI.OpenAI --prerelease
+    dotnet package add Microsoft.SemanticKernel.Connectors.InMemory --prerelease
+    dotnet package add Microsoft.Extensions.Configuration
+    dotnet package add Microsoft.Extensions.Configuration.UserSecrets
+    dotnet package add System.Linq.AsyncEnumerable
     ```
 
     The following list describes each package in the `VectorDataAI` app:
 
     - [`Microsoft.Extensions.AI.OpenAI`](https://www.nuget.org/packages/Microsoft.Extensions.AI.OpenAI) provides AI abstractions for OpenAI-compatible models or endpoints. This library also includes the official [`OpenAI`](https://www.nuget.org/packages/OpenAI) library for the OpenAI service API as a dependency.
-    - [`Microsoft.Extensions.VectorData.Abstractions`](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions) enables Create-Read-Update-Delete (CRUD) and search operations on vector stores.
-    - [`Microsoft.SemanticKernel.Connectors.InMemory`](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) provides an in-memory vector store class to hold queryable vector data records.
+    - [`Microsoft.SemanticKernel.Connectors.InMemory`](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) provides an in-memory vector store class to hold queryable vector data records. It also brings in [`Microsoft.Extensions.VectorData.Abstractions`](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions), which enables CRUD and search operations on vector stores.
     - [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) provides an implementation of key-value pair&mdash;based configuration.
     - [`Microsoft.Extensions.Configuration.UserSecrets`](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) is a user secrets configuration provider implementation for `Microsoft.Extensions.Configuration`.
 
@@ -112,7 +108,7 @@ Complete the following steps to create a .NET console app that can:
 
 :::zone target="docs" pivot="azure-openai"
 
-[!INCLUDE [create-ai-service](includes/create-ai-service.md)]
+[!INCLUDE [create-ai-service](../../quickstarts/includes/create-ai-service.md)]
 
 :::zone-end
 
@@ -139,48 +135,48 @@ Complete the following steps to create a .NET console app that can:
 
 1. Add a new class named `CloudService` to your project with the following properties:
 
-   :::code language="csharp" source="snippets/chat-with-data/azure-openai/CloudService.cs" :::
+   :::code language="csharp" source="../snippets/chat-with-data/azure-openai/CloudService.cs" :::
 
-    The <xref:Microsoft.Extensions.VectorData> attributes, such as <xref:Microsoft.Extensions.VectorData.VectorStoreKeyAttribute>, influence how each property is handled when used in a vector store. The `Vector` property stores a generated embedding that represents the semantic meaning of the `Description` value for vector searches.
+   The <xref:Microsoft.Extensions.VectorData> attributes, such as <xref:Microsoft.Extensions.VectorData.VectorStoreKeyAttribute>, influence how each property is handled when used in a vector store. The `Vector` property stores a generated embedding that represents the semantic meaning of the `Description` value for vector searches.
 
 1. In the `Program.cs` file, add the following code to create a data set that describes a collection of cloud services:
 
-   :::code language="csharp" source="snippets/chat-with-data/azure-openai/program.cs" id="DataSet":::
+   :::code language="csharp" source="../snippets/chat-with-data/azure-openai/program.cs" id="DataSet":::
 
 1. Create and configure an `IEmbeddingGenerator` implementation to send requests to an embedding AI model:
 
-    :::zone target="docs" pivot="azure-openai"
+   :::zone target="docs" pivot="azure-openai"
 
-    :::code language="csharp" source="snippets/chat-with-data/azure-openai/program.cs" id="EmbeddingGenerator":::
+   :::code language="csharp" source="../snippets/chat-with-data/azure-openai/program.cs" id="EmbeddingGenerator":::
 
     > [!NOTE]
-    > <xref:Azure.Identity.DefaultAzureCredential> searches for authentication credentials from your local tooling. You'll need to assign the `Azure AI Developer` role to the account you used to sign in to Visual Studio or the Azure CLI. For more information, see [Authenticate to Foundry tools with .NET](../azure-ai-services-authentication.md).
+    > <xref:Azure.Identity.DefaultAzureCredential> searches for authentication credentials from your local tooling. You'll need to assign the `Azure AI Developer` role to the account you used to sign in to Visual Studio or the Azure CLI. For more information, see [Authenticate to Foundry tools with .NET](../../azure-ai-services-authentication.md).
 
-    :::zone-end
+   :::zone-end
 
-    :::zone target="docs" pivot="openai"
+   :::zone target="docs" pivot="openai"
 
-    :::code language="csharp" source="snippets/chat-with-data/openai/program.cs" id="EmbeddingGenerator":::
+   :::code language="csharp" source="../snippets/chat-with-data/openai/program.cs" id="EmbeddingGenerator":::
 
-    :::zone-end
+   :::zone-end
 
 1. Create and populate a vector store with the cloud service data. Use the `IEmbeddingGenerator` implementation to create and assign an embedding vector for each record in the cloud service data:
 
-    :::code language="csharp" source="snippets/chat-with-data/azure-openai/program.cs" id="VectorStore":::
+   :::code language="csharp" source="../snippets/chat-with-data/azure-openai/program.cs" id="VectorStore":::
 
    The embeddings are numerical representations of the semantic meaning for each data record, which makes them compatible with vector search features.
 
 1. Create an embedding for a search query and use it to perform a vector search on the vector store:
 
-    :::code language="csharp" source="snippets/chat-with-data/azure-openai/program.cs" id="Search":::
+   :::code language="csharp" source="../snippets/chat-with-data/azure-openai/program.cs" id="Search":::
 
 1. Use the `dotnet run` command to run the app:
 
-    ```dotnetcli
-    dotnet run
-    ```
+   ```dotnetcli
+   dotnet run
+   ```
 
-    The app prints out the top result of the vector search, which is the cloud service that's most relevant to the original query. You can modify the query to try different search scenarios.
+   The app prints out the top result of the vector search, which is the cloud service that's most relevant to the original query. You can modify the query to try different search scenarios.
 
 :::zone target="docs" pivot="azure-openai"
 
@@ -195,5 +191,5 @@ If you no longer need them, delete the Azure OpenAI resource and model deploymen
 
 ## Next steps
 
-- [Quickstart - Chat with a local AI model](chat-local-model.md)
-- [Generate images from text using AI](text-to-image.md)
+- [Quickstart - Chat with a local AI model](../../quickstarts/chat-local-model.md)
+- [Generate images from text using AI](../../quickstarts/text-to-image.md)
