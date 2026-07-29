@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.7" />
-    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="SQLite" Version="3.53.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.json">
